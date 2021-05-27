@@ -18,3 +18,6 @@ class Folder(Base, CRUDMixin):
         if key == "name":
             self._validated_name(value)
         super().__setattr__(key, value)
+
+
+# todo1: follow with islam and devops to fix deployment issues, conf[identity,

@@ -9,6 +9,9 @@ def breakline(char="#", times=50):
 
 
 class CRUDMixin(ABC):
+    """
+    act like interface
+    """
     def __init__(self, *args, **kwargs):
         self.items = []
 
