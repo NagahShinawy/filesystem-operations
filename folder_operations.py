@@ -2,13 +2,20 @@
 created by Nagaj at 26/05/2021
 """
 from mixin import CRUDMixin
+from files_operations import Base
 
 
-class Folder(CRUDMixin):
+class Folder(Base, CRUDMixin):
+
     def __init__(self, foldername):
-        super().__init__()
-        self.folder_name = foldername
+        Base.__init__(self, foldername)
+        CRUDMixin.__init__(self)
         self.files = self.items
 
     def __str__(self):
-        return self.folder_name
+        return self.name
+
+    def __setattr__(self, key, value):
+        if key == "name":
+            self._validated_name(value)
+        super().__setattr__(key, value)
