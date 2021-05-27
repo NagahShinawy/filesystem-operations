@@ -44,6 +44,10 @@ def main():
     for file in personal_data:
         print(file)
 
+    breakline()
+    # Word("test", ".py", 2010)
+    Word("test?", ".docx", 2010)
+
 
 if __name__ == "__main__":
     main()
