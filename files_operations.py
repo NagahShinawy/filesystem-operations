@@ -44,7 +44,9 @@ class File(ABC, Base):
     @classmethod
     def __validated_extension(cls, value):
         if value not in cls.EXTENSIONS:
-            raise InvalidExtension(InvalidExtension.message.format(value=value, extensions=cls.EXTENSIONS))
+            raise InvalidExtension(
+                InvalidExtension.message.format(value=value, extensions=cls.EXTENSIONS)
+            )
 
     @abstractmethod
     def show_fileinfo(self):

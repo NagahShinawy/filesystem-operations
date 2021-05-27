@@ -6,7 +6,6 @@ from files_operations import Base
 
 
 class Folder(Base, CRUDMixin):
-
     def __init__(self, foldername):
         Base.__init__(self, foldername)
         CRUDMixin.__init__(self)

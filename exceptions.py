@@ -1,8 +1,14 @@
 """
 created by Nagaj at 27/05/2021
 """
-from constants import APP_ERROR, INVALID_NAME_CODE, INVALID_NAME_MSG, GENERAL_ERROR_MSG, INVALID_EXTENSION_MSG, \
-    INVALID_EXTENSION_CODE
+from constants import (
+    APP_ERROR,
+    INVALID_NAME_CODE,
+    INVALID_NAME_MSG,
+    GENERAL_ERROR_MSG,
+    INVALID_EXTENSION_MSG,
+    INVALID_EXTENSION_CODE,
+)
 
 
 class BaseAPIError(Exception):

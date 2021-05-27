@@ -10,4 +10,3 @@ INVALID_EXTENSION_CODE = 12300
 GENERAL_ERROR_MSG = "An error occurred"
 INVALID_NAME_MSG = "Invalid {classname} name <{value}>. it contains <{char}>"
 INVALID_EXTENSION_MSG = "Invalid extension '{value}'!. only allowed {extensions}"
-
