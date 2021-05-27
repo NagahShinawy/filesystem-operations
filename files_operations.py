@@ -2,6 +2,7 @@
 created by Nagaj at 26/05/2021
 """
 from abc import ABC, abstractmethod
+from exceptions import InvalidCharForName, InvalidExtension
 
 
 class Base:
@@ -14,7 +15,11 @@ class Base:
     def _validated_name(cls, value):
         for char in value:
             if char in cls.BAD_CHARS:
-                raise ValueError(f"invalid filename <{value}>. it contains <{char}>")
+                raise InvalidCharForName(
+                    InvalidCharForName.message.format(
+                        classname=cls.__name__, value=value, char=char
+                    )
+                )
 
 
 class File(ABC, Base):
@@ -39,7 +44,7 @@ class File(ABC, Base):
     @classmethod
     def __validated_extension(cls, value):
         if value not in cls.EXTENSIONS:
-            raise ValueError(f"invalid extension '{value}'!")
+            raise InvalidExtension(InvalidExtension.message.format(value=value, extensions=cls.EXTENSIONS))
 
     @abstractmethod
     def show_fileinfo(self):

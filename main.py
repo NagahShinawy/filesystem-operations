@@ -45,9 +45,9 @@ def main():
         print(file)
 
     breakline()
-    # Word("test", ".py", 2010)
+    Word("test", ".py", 2010)
     # Word("test?", ".docx", 2010)
-    movies = Folder("movies:")
+    # movies = Folder("movies:")
 
 
 if __name__ == "__main__":
