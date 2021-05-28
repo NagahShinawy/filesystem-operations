@@ -2,14 +2,17 @@
 created by Nagaj at 26/05/2021
 """
 from abc import ABC, abstractmethod
+
 from exceptions import InvalidCharForName, InvalidExtension
 
 
 class Base:
     BAD_CHARS = r"\/:?|*<>"
 
-    def __init__(self, name, *args, **kwargs):
+    def __init__(self, name, sizeondisk, created=None, *args, **kwargs):
         self.name = name
+        self.sizeondisk = sizeondisk
+        self.created = created
 
     @classmethod
     def _validated_name(cls, value):
@@ -21,13 +24,18 @@ class Base:
                     )
                 )
 
+    def __setattr__(self, attribute, value):
+        if attribute == "name":
+            self._validated_name(value)
+        super().__setattr__(attribute, value)
 
-class File(ABC, Base):
+
+class File(Base, ABC):
     number_of_files = 0
     EXTENSIONS = [".xlsx", ".docx", ".png", ".jpg", ".mp3", ".mp4", ".pdf", ".exe"]
 
-    def __init__(self, fname, extension):
-        super().__init__(fname)
+    def __init__(self, fname, extension, sizeondisk=0, created=None, *args, **kwargs):
+        super().__init__(fname, sizeondisk, created, *args, **kwargs)
         self.extension = extension
         File.number_of_files += 1
 
@@ -37,13 +45,12 @@ class File(ABC, Base):
     def __setattr__(self, attribute, value):
         if attribute == "extension":
             self.__validated_extension(value)
-        if attribute == "name":
-            self._validated_name(value)
+
         super().__setattr__(attribute, value)
 
     @classmethod
     def __validated_extension(cls, value):
-        if value not in cls.EXTENSIONS:
+        if value is not None and value not in cls.EXTENSIONS:
             raise InvalidExtension(
                 InvalidExtension.message.format(value=value, extensions=cls.EXTENSIONS)
             )
@@ -55,18 +62,17 @@ class File(ABC, Base):
 
 
 class Word(File):
-    def __init__(self, fname, extension, released):
-        self.released = released
-        super().__init__(fname, extension)
+    def __init__(self, fname, extension, *args, **kwargs):
+        super().__init__(fname, extension, *args, **kwargs)
 
     def show_fileinfo(self):
         super().show_fileinfo()
-        print(f"App '{self.__class__}' Released: {self.released}")
+        print(f"App '{self.__class__}' Released: {self.created}")
 
 
 class Excel(File):
-    def __init__(self, filename, file_extension, usages):
-        super().__init__(filename, file_extension)
+    def __init__(self, filename, file_extension, usages, *args, **kwargs):
+        super().__init__(filename, file_extension, *args, **kwargs)
         self.usg = usages
 
     def show_fileinfo(self):

@@ -4,22 +4,20 @@ from mixin import breakline
 
 
 def main():
-    cv = Word("python-cv", ".docx", 2016)
+    cv = Word("python-cv", ".docx")
     breakline()
     cv.show_fileinfo()
     breakline()
 
-    emps = Excel("employees", ".xlsx", "reports")
+    emps = Excel(filename="employees", file_extension=".xlsx", usages="reports", sizeondisk=12, created="2019-09-01")
     emps.show_fileinfo()
 
     # generalfile = File(
     #     "test", ""
     # )  # error TypeError: Can't instantiate abstract class File with abstract methods show_fileinfo
 
-    data = [emps, cv]
-
     breakline()
-    for f in data:
+    for f in [emps, cv]:
         f.show_fileinfo()
         breakline(char="*")
 
