@@ -12,7 +12,6 @@ from constants import (
 
 
 class BaseAPIError(Exception):
-    """ A base exception class that represents a generic API error """
 
     code = APP_ERROR
     message = GENERAL_ERROR_MSG
